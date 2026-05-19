@@ -24,6 +24,37 @@ foreach ($d in @($ckptDir, $loraDir)) {
 # Install identity-injection extensions (ReActor face swap + ADetailer face inpaint).
 & (Join-Path $PSScriptRoot "setup-forge-extensions.ps1")
 
+# Forge's torch 2.3.1 has no wheels for Python 3.12+. Pin webui-user.bat to a
+# 3.10/3.11 interpreter if one is available via the `py` launcher.
+$webuiUser = Join-Path $target "webui-user.bat"
+if (Test-Path $webuiUser) {
+    $pyExe = $null
+    foreach ($ver in @("3.10", "3.11")) {
+        try {
+            $candidate = & py "-$ver" -c "import sys; print(sys.executable)" 2>$null
+            if ($LASTEXITCODE -eq 0 -and $candidate -and (Test-Path $candidate.Trim())) {
+                $pyExe = $candidate.Trim()
+                break
+            }
+        } catch { }
+    }
+    $content = Get-Content $webuiUser -Raw
+    if ($pyExe -and $content -match "(?m)^set PYTHON=\s*$") {
+        $newLine = "set PYTHON=`"$pyExe`""
+        $patched = $content -replace "(?m)^set PYTHON=\s*$", [System.Text.RegularExpressions.Regex]::Escape($newLine).Replace("\","\\")
+        # Simpler: do a direct string replace.
+        $patched = $content.Replace("set PYTHON=`r`n", "set PYTHON=`"$pyExe`"`r`n")
+        if ($patched -ne $content) {
+            Set-Content -LiteralPath $webuiUser -Value $patched -NoNewline
+            Write-Host "[+] Pinned webui-user.bat PYTHON to $pyExe"
+        }
+    } elseif (-not $pyExe) {
+        Write-Host "[!] Could not find Python 3.10 or 3.11 via 'py' launcher."
+        Write-Host "    Install one from https://www.python.org/downloads/release/python-31011/"
+        Write-Host "    then edit $webuiUser and set PYTHON=`"C:\path\to\python.exe`""
+    }
+}
+
 Write-Host ""
 Write-Host "Forge installed at: $target"
 Write-Host ""

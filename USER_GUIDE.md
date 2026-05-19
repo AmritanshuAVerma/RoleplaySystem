@@ -244,10 +244,13 @@ pnpm sd:setup    # clones Forge into vendor/sd-webui-forge
 The first time `pnpm sd` (or [start.bat](start.bat)) launches Forge, it downloads
 its own Python venv + PyTorch (~5 GB). Subsequent launches are fast.
 
-> **Python note:** Forge expects Python 3.10–3.11. If your system Python is newer
-> (e.g. 3.14) Forge will install its bundled venv on first run — leave it alone, it
-> works. If it errors out, install Python 3.10.x and put it ahead of newer versions
-> on `PATH`.
+> **Python note:** Forge needs Python **3.10 or 3.11** (torch 2.3.1 has no wheels
+> for 3.12+). `pnpm sd:setup` auto-detects an installed 3.10/3.11 via the `py`
+> launcher and pins `vendor/sd-webui-forge/webui-user.bat` to it. If neither is
+> installed, grab [Python 3.10.11](https://www.python.org/downloads/release/python-31011/)
+> (tick "Add to PATH" or just install the py launcher), re-run `pnpm sd:setup`,
+> and delete `vendor/sd-webui-forge/venv/` if it was already created with the
+> wrong Python.
 
 ### 9.2 Download Pony Realism + LoRAs
 
