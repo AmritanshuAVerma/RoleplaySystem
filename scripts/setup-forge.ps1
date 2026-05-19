@@ -24,6 +24,18 @@ foreach ($d in @($ckptDir, $loraDir)) {
 # Install identity-injection extensions (ReActor face swap + ADetailer face inpaint).
 & (Join-Path $PSScriptRoot "setup-forge-extensions.ps1")
 
+# Write a pip constraints file so legacy deps (OpenAI CLIP, etc.) that still
+# import pkg_resources can build under pip's isolation (setuptools 81+ removed it).
+$constraintsFile = Join-Path $target "pip-constraints.txt"
+if (-not (Test-Path $constraintsFile)) {
+    @(
+        "# Pin setuptools below 81 so legacy packages (OpenAI CLIP, etc.) that still",
+        "# import pkg_resources can build during pip's isolated builds.",
+        "setuptools<81"
+    ) | Set-Content -LiteralPath $constraintsFile
+    Write-Host "[+] Wrote pip-constraints.txt"
+}
+
 # Forge's torch 2.3.1 has no wheels for Python 3.12+. Pin webui-user.bat to a
 # 3.10/3.11 interpreter if one is available via the `py` launcher.
 $webuiUser = Join-Path $target "webui-user.bat"
@@ -39,19 +51,25 @@ if (Test-Path $webuiUser) {
         } catch { }
     }
     $content = Get-Content $webuiUser -Raw
+    $patched = $content
     if ($pyExe -and $content -match "(?m)^set PYTHON=\s*$") {
-        $newLine = "set PYTHON=`"$pyExe`""
-        $patched = $content -replace "(?m)^set PYTHON=\s*$", [System.Text.RegularExpressions.Regex]::Escape($newLine).Replace("\","\\")
-        # Simpler: do a direct string replace.
-        $patched = $content.Replace("set PYTHON=`r`n", "set PYTHON=`"$pyExe`"`r`n")
-        if ($patched -ne $content) {
-            Set-Content -LiteralPath $webuiUser -Value $patched -NoNewline
-            Write-Host "[+] Pinned webui-user.bat PYTHON to $pyExe"
-        }
+        $patched = $patched.Replace("set PYTHON=`r`n", "set PYTHON=`"$pyExe`"`r`n")
+        Write-Host "[+] Pinned webui-user.bat PYTHON to $pyExe"
     } elseif (-not $pyExe) {
         Write-Host "[!] Could not find Python 3.10 or 3.11 via 'py' launcher."
         Write-Host "    Install one from https://www.python.org/downloads/release/python-31011/"
         Write-Host "    then edit $webuiUser and set PYTHON=`"C:\path\to\python.exe`""
+    }
+    # Make Forge respect the pip constraints file on every launch.
+    if ($patched -notmatch "PIP_CONSTRAINT") {
+        $patched = $patched.Replace(
+            "set COMMANDLINE_ARGS=`r`n",
+            "set COMMANDLINE_ARGS=`r`nset PIP_CONSTRAINT=%~dp0pip-constraints.txt`r`n"
+        )
+        Write-Host "[+] Wired PIP_CONSTRAINT into webui-user.bat"
+    }
+    if ($patched -ne $content) {
+        Set-Content -LiteralPath $webuiUser -Value $patched -NoNewline
     }
 }
 
