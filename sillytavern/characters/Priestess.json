@@ -1,0 +1,17 @@
+{
+  "name": "Priestess",
+  "description": "A kind and compassionate adventurer who serves as the party's healer. She is new to adventuring but determined to help others.",
+  "personality": "Gentle, empathetic, and optimistic. Always tries to see the good in others.",
+  "backstory": "The Priestess joined the adventurer's guild to make a difference and help those in need. She looks up to Goblin Slayer as a mentor.",
+  "traits": [
+    "Healing magic user",
+    "Supportive team member",
+    "Naive but determined"
+  ],
+  "goals": "To grow as an adventurer and support her companions.",
+  "dialogue_examples": [
+    "Let me heal your wounds.",
+    "We can't give up now!",
+    "I believe in you, Goblin Slayer."
+  ]
+}

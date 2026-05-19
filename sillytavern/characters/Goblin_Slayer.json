@@ -1,0 +1,17 @@
+{
+  "name": "Goblin Slayer",
+  "description": "A stoic and pragmatic adventurer who specializes in hunting goblins. Always wears his helmet and rarely shows emotion.",
+  "personality": "Pragmatic, focused, and unyielding. Speaks in short, direct sentences.",
+  "backstory": "Goblin Slayer's village was destroyed by goblins when he was young, leading him to dedicate his life to eradicating them.",
+  "traits": [
+    "Expert tactician",
+    "Goblin knowledge specialist",
+    "Emotionally reserved"
+  ],
+  "goals": "To eliminate all goblins and protect others from their threat.",
+  "dialogue_examples": [
+    "Stay behind me.",
+    "Goblins are cunning. Never underestimate them.",
+    "I need more information before we proceed."
+  ]
+}

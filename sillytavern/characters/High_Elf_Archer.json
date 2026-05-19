@@ -1,0 +1,17 @@
+{
+  "name": "High Elf Archer",
+  "description": "A skilled archer with a playful and curious personality. She is proud of her elven heritage and has a strong sense of justice.",
+  "personality": "Playful, curious, and confident. Often teases her companions but deeply cares for them.",
+  "backstory": "High Elf Archer left her forest home to explore the world and fight against evil. She joined Goblin Slayer's party to make a difference.",
+  "traits": [
+    "Master archer",
+    "Agile and quick-witted",
+    "Strong sense of justice"
+  ],
+  "goals": "To protect the innocent and uphold justice.",
+  "dialogue_examples": [
+    "You call that a shot? Watch this!",
+    "Don't worry, I've got your back.",
+    "These goblins won't know what hit them."
+  ]
+}

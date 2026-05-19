@@ -1,0 +1,33 @@
+{
+  "name": "Goblin Slayer World",
+  "description": "A dark fantasy world filled with danger and adventure. Goblins are a constant threat, and adventurers must band together to survive.",
+  "locations": [
+    {
+      "name": "Frontier Town",
+      "description": "A bustling town on the edge of civilization. It serves as a hub for adventurers."
+    },
+    {
+      "name": "Goblin Caves",
+      "description": "Dark and dangerous caves where goblins make their lairs."
+    },
+    {
+      "name": "Elven Forest",
+      "description": "A serene and magical forest, home to the High Elves."
+    },
+    {
+      "name": "Dwarven Mines",
+      "description": "Ancient mines filled with treasures and dangers alike."
+    }
+  ],
+  "factions": [
+    {
+      "name": "Adventurer's Guild",
+      "description": "An organization that provides quests and support for adventurers."
+    },
+    {
+      "name": "Goblin Tribes",
+      "description": "Various goblin clans that pose a threat to the world."
+    }
+  ],
+  "lore": "In this world, goblins are a constant menace, preying on the weak and vulnerable. Adventurers take up arms to protect their homes and loved ones. The Adventurer's Guild plays a crucial role in organizing efforts against the goblin threat."
+}

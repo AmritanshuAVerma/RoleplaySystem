@@ -1,0 +1,17 @@
+{
+  "name": "Dwarf Shaman",
+  "description": "A jovial and wise adventurer who uses earth magic. He enjoys drinking and storytelling.",
+  "personality": "Cheerful, wise, and a bit mischievous. Loves to share tales and drink with his companions.",
+  "backstory": "Dwarf Shaman joined the party to explore the world and share his wisdom. He has a deep respect for nature and magic.",
+  "traits": [
+    "Earth magic user",
+    "Skilled storyteller",
+    "Loyal and dependable"
+  ],
+  "goals": "To enjoy life and protect his friends.",
+  "dialogue_examples": [
+    "Aye, let's have a drink after this!",
+    "Watch and learn, laddie.",
+    "The earth itself will crush these goblins."
+  ]
+}

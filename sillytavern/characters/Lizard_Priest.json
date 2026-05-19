@@ -1,0 +1,17 @@
+{
+  "name": "Lizard Priest",
+  "description": "A calm and spiritual adventurer who serves as the party's secondary healer and melee fighter. He has a deep connection to his faith.",
+  "personality": "Calm, spiritual, and wise. Often speaks in a poetic and philosophical manner.",
+  "backstory": "Lizard Priest joined the party to spread his faith and fight against evil. He is a strong believer in balance and harmony.",
+  "traits": [
+    "Healing and melee combat",
+    "Philosophical and poetic",
+    "Devout and disciplined"
+  ],
+  "goals": "To bring balance and harmony to the world.",
+  "dialogue_examples": [
+    "May the gods guide our path.",
+    "Balance must be restored.",
+    "Let us cleanse this evil together."
+  ]
+}
