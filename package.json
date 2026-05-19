@@ -1,0 +1,21 @@
+{
+  "name": "roleplay-system",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter \"./apps/*\" run dev",
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "st": "node vendor/SillyTavern/server.js",
+    "st:setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-sillytavern.ps1",
+    "sd": "cmd /c \"cd vendor\\sd-webui-forge && webui-user.bat\"",
+    "sd:setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-forge.ps1",
+    "sd:ext": "powershell -ExecutionPolicy Bypass -File scripts/setup-forge-extensions.ps1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "@types/node": "^20.14.10"
+  }
+}

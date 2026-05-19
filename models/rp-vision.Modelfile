@@ -1,0 +1,10 @@
+﻿# Tuned variant of huihui_ai/qwen3-vl-abliterated:4b for an 8 GB-VRAM GPU.
+# Forces full-GPU offload and caps context so the weights + vision
+# projector + KV cache fit entirely in VRAM.
+FROM huihui_ai/qwen3-vl-abliterated:4b
+
+# 999 = "all layers on GPU" in Ollama.
+PARAMETER num_gpu 999
+# Default ctx of 32768 spilled ~38% to CPU on an RTX 5060 Laptop (8 GB).
+# 8192 fits entirely on GPU. Drop to 4096 if you also load a second model.
+PARAMETER num_ctx 8192

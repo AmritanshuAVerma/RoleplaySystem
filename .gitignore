@@ -1,0 +1,33 @@
+node_modules
+.next
+dist
+build
+out
+*.log
+.env
+.env.local
+*.sqlite
+*.sqlite-journal
+data/
+.DS_Store
+.turbo
+.cache
+
+# Vendored third-party apps (cloned via scripts/setup-sillytavern.ps1 / setup-forge.ps1)
+vendor/
+
+# Model weights — never commit. Ollama Modelfiles (build scripts) are allowed.
+models/*
+!models/*.Modelfile
+!models/README.md
+*.safetensors
+*.ckpt
+*.gguf
+*.pt
+*.bin
+*.onnx
+
+# Generated media & uploads
+apps/orchestrator/uploads/
+apps/orchestrator/generated/
+apps/orchestrator/data/
